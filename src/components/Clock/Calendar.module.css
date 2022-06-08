@@ -1,0 +1,16 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  gap: 10px;
+}
+
+.month,
+.day,
+.date,
+.year {
+  color: rgb(231, 231, 231);
+}

@@ -1,0 +1,58 @@
+.time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hour,
+.dots,
+.minutes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  padding: 0 10px;
+  line-height: 125px;
+}
+
+.hour,
+.minutes {
+  font-size: 4rem;
+  width: 125px;
+}
+
+.dots {
+  font-size: 3rem;
+  color: #929292;
+}
+
+.hour {
+  color: aqua;
+}
+
+.minutes {
+  color: salmon;
+}
+
+.rightSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.period,
+.seconds {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.period {
+  transform: translateY(-20px);
+  color: yellow;
+}
+
+.seconds {
+  transform: translateY(15px);
+  color: greenyellow;
+}
