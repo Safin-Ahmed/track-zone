@@ -1,21 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import Container from "../../UI/inputs/Container";
+import ErrorMessage from "../../UI/inputs/ErrorMessage";
 import Label from "../../UI/inputs/Label";
 import TextInput from "../../UI/inputs/TextInput";
-
-const Container = styled.div`
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid #e1e1e1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const ErrorMessage = styled.div`
-  font-size: 0.8rem;
-  color: red;
-`;
 
 const InputGroup = ({
   label,
@@ -26,6 +13,7 @@ const InputGroup = ({
   onFocus,
   onBlur,
   error,
+  type,
 }) => {
   return (
     <Container>
@@ -37,6 +25,8 @@ const InputGroup = ({
         name={name}
         id={name}
         placeholder={placeholder ?? ""}
+        value={value}
+        type={`${type ? type : "text"}`}
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>

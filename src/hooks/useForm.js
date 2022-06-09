@@ -106,3 +106,5 @@ const useForm = ({ init, validate }) => {
     clear,
   };
 };
+
+export default useForm;

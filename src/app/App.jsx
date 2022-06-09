@@ -3,6 +3,8 @@ import Clock from "../components/Clock/Clock";
 import { deepClone } from "../utils/objUtils";
 import iterator from "../utils/idGen";
 import "./App.css";
+import Form from "../components/Form/Form";
+import SelectInput from "../components/UI/inputs/SelectInput";
 
 const defaultState = {
   user: {
@@ -14,6 +16,7 @@ const defaultState = {
 
 function App() {
   const [state, setState] = useState(defaultState);
+  const [popupFormShown, setPopupFormShown] = useState(false);
   const setTitleHandler = (isUser, id, newTitle) => {
     const newState = deepClone(state);
     if (isUser) {
@@ -35,19 +38,28 @@ function App() {
     }
   };
   const addClockHandler = () => {
-    const newState = deepClone(state);
-    const newClock = {
-      id: iterator.next().value,
-      title: "New Clock",
-      time: new Date(),
-      timeZone: "Asia/Kolkata",
-    };
-
-    newState.clocks.push(newClock);
-    setState(newState);
+    setPopupFormShown(true);
+    // const newState = deepClone(state);
+    // const newClock = {
+    //   id: iterator.next().value,
+    //   title: "New Clock",
+    //   time: new Date(),
+    //   timeZone: "Asia/Kolkata",
+    // };
+    // newState.clocks.push(newClock);
+    // setState(newState);
   };
   return (
     <>
+      {popupFormShown && (
+        <>
+          <div
+            className="backdrop"
+            onClick={() => setPopupFormShown(false)}
+          ></div>
+          <Form />
+        </>
+      )}
       <div className="default-clock">
         <Clock
           isDefault="true"
