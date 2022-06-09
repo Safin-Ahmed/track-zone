@@ -12,6 +12,7 @@ const Clock = ({
   timeZone,
   setTitleHandler,
   setTimeZoneHandler,
+  onContextHandler,
 }) => {
   const { date, hours, minutes, seconds, period, month, numDay, day, year } =
     useClock(timeZone);
@@ -20,6 +21,7 @@ const Clock = ({
       className={`${classes.clockContainer} ${
         isDefault ? classes.bigContainer : ""
       }`}
+      onContextMenu={onContextHandler}
     >
       {isDefault && (
         <Title

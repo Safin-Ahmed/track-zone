@@ -8,7 +8,7 @@ const init = {
   title: "",
   time: "",
   date: "",
-  timeZone: "",
+  timeZone: "Africa/Abidjan",
 };
 
 const validate = (values) => {
@@ -31,13 +31,15 @@ const validate = (values) => {
 
 const arrOfTimeZones = Intl.supportedValuesOf("timeZone");
 
-const Form = ({ addNewClock, setPopupFormShown }) => {
+const Form = ({ addNewClock, setPopupFormShown, type = "add" }) => {
   const submitCB = ({ values }) => {
     console.log(values);
     addNewClock(values);
     clear();
     setPopupFormShown(false);
   };
+
+  const editCB = (id) => {};
   const {
     formState: state,
     handleBlur,
@@ -49,7 +51,7 @@ const Form = ({ addNewClock, setPopupFormShown }) => {
   return (
     <form
       className={classes.popupForm}
-      onSubmit={(e) => handleSubmit(e, submitCB)}
+      onSubmit={(e) => handleSubmit(e, (type = "add" ? submitCB : editCB))}
     >
       <div className="form-group">
         <InputGroup

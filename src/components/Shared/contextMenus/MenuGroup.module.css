@@ -1,0 +1,17 @@
+.nav {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav li {
+  cursor: pointer;
+  font-weight: 400;
+  border-bottom: 1px solid #eee;
+  transition: all 0.2s ease;
+}
+
+.nav li:hover {
+  color: tomato;
+}
