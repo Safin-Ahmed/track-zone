@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Clock from "../components/Clock/Clock";
-import { deepClone } from "../utils/deepClone";
+import { deepClone } from "../utils/objUtils";
 import iterator from "../utils/idGen";
 import "./App.css";
 
