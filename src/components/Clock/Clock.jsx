@@ -16,7 +16,11 @@ const Clock = ({
   const { date, hours, minutes, seconds, period, month, numDay, day, year } =
     useClock(timeZone);
   return (
-    <div className={classes.clockContainer}>
+    <div
+      className={`${classes.clockContainer} ${
+        isDefault ? classes.bigContainer : ""
+      }`}
+    >
       {isDefault && (
         <Title
           setTitleHandler={setTitleHandler}
@@ -34,7 +38,11 @@ const Clock = ({
           isDefault={isDefault}
         />
       )}
-      <div className={classes.digitalClock}>
+      <div
+        className={`${classes.digitalClock} ${
+          isDefault ? classes.bigClock : ""
+        }`}
+      >
         <Time
           hours={hours}
           minutes={minutes}

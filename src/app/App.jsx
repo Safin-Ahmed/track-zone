@@ -48,12 +48,14 @@ function App() {
   };
   return (
     <>
-      <Clock
-        isDefault="true"
-        title={state.user.title}
-        setTitleHandler={setTitleHandler}
-        setTimeZoneHandler={setTimeZoneHandler}
-      />
+      <div className="default-clock">
+        <Clock
+          isDefault="true"
+          title={state.user.title}
+          setTitleHandler={setTitleHandler}
+          setTimeZoneHandler={setTimeZoneHandler}
+        />
+      </div>
       <div className="custom-clocks">
         {state.clocks.map((clock) => (
           <Clock

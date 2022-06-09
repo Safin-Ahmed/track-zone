@@ -2,6 +2,23 @@
   background-color: #1b1b1b;
   box-shadow: 0 5px 25px rgba(14, 21, 37, 0.8);
   border-radius: 10px;
+  cursor: pointer;
+  max-width: 425px;
+  margin: auto;
+  transition: all 0.2s ease-in;
+}
+
+.bigContainer {
+  max-width: 80vw;
+  margin: auto;
+}
+
+.bigClock {
+  width: 80vw !important;
+}
+
+.clockContainer:hover {
+  transform: translateY(-20px);
 }
 
 .digitalClock {
