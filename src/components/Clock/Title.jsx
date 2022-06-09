@@ -20,14 +20,14 @@ const Title = ({
   };
   const blurHandler = (e) => {
     setClicked(false);
-    if (id && !isDefault) {
+    if (!isDefault) {
       setTitleHandler(
         false,
         id,
         e.target.value ? e.target.value : "Your Clock"
       );
     } else {
-      setTitleHandler(true, e.target.value ? e.target.value : "Your Clock");
+      setTitleHandler(true, id, e.target.value ? e.target.value : "Your Clock");
     }
   };
   return (

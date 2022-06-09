@@ -28,7 +28,9 @@ const Clock = ({
           setTitleHandler={setTitleHandler}
           setTimeZoneHandler={setTimeZoneHandler}
           defaultTitle={title}
-          timeZone="BD"
+          timeZone={timeZone}
+          isDefault={isDefault}
+          id={id}
         />
       )}
       {!isDefault && (

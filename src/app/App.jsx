@@ -14,7 +14,7 @@ const defaultState = {
     id: "uz",
     title: "Your Clock",
     time: "",
-    timeZone: "",
+    timeZone: "Asia/Dhaka",
   },
   clocks: [],
 };
@@ -125,6 +125,9 @@ function App() {
           <Clock
             isDefault="true"
             title={state.user.title}
+            id={state.user.id}
+            time={state.user.time}
+            timeZone={state.user.timeZone}
             setTitleHandler={setTitleHandler}
             setTimeZoneHandler={setTimeZoneHandler}
             onContextHandler={(e) => contextHandler(e, true, state.user.id)}
