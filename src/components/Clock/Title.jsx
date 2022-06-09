@@ -49,7 +49,7 @@ const Title = ({
             {title ? title : "Your Clock"}
           </span>
         )}
-        {timeZone && <span className={classes.timeZone}> - {timeZone}</span>}
+        {timeZone && <span className={classes.timeZone}> {timeZone}</span>}
       </div>
     </>
   );

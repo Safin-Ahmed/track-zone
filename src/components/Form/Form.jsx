@@ -29,14 +29,15 @@ const validate = (values) => {
   return errors;
 };
 
-const submitCB = ({ values }) => {
-  console.log(values);
-};
-
 const arrOfTimeZones = Intl.supportedValuesOf("timeZone");
-console.log(arrOfTimeZones);
 
-const Form = () => {
+const Form = ({ addNewClock, setPopupFormShown }) => {
+  const submitCB = ({ values }) => {
+    console.log(values);
+    addNewClock(values);
+    clear();
+    setPopupFormShown(false);
+  };
   const {
     formState: state,
     handleBlur,

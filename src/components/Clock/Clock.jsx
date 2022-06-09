@@ -36,6 +36,7 @@ const Clock = ({
           defaultTitle={title}
           id={id}
           isDefault={isDefault}
+          timeZone={timeZone}
         />
       )}
       <div

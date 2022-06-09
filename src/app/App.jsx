@@ -37,6 +37,20 @@ function App() {
       return;
     }
   };
+
+  const addNewClock = (values) => {
+    const newState = deepClone(state);
+    const newClock = {
+      id: iterator.next().value,
+      title: values.title,
+      time: `${values.date ? values.date : ""}${
+        values.time ? values.time : ""
+      }`,
+      timeZone: values.timeZone,
+    };
+    newState.clocks.push(newClock);
+    setState(newState);
+  };
   const addClockHandler = () => {
     setPopupFormShown(true);
     // const newState = deepClone(state);
@@ -57,7 +71,10 @@ function App() {
             className="backdrop"
             onClick={() => setPopupFormShown(false)}
           ></div>
-          <Form />
+          <Form
+            addNewClock={addNewClock}
+            setPopupFormShown={setPopupFormShown}
+          />
         </>
       )}
       <div className="default-clock">
