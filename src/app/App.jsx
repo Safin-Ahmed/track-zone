@@ -11,7 +11,7 @@ const defaultState = {
   user: {
     id: "uz",
     title: "Your Clock",
-    time: "",
+    time: new Date(),
     timeZone: "Asia/Dhaka",
   },
   clocks: [],

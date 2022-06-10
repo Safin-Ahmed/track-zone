@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
 let init;
-let startDate = new Date();
 const useClock = (timeZone, userTime = null) => {
   let [time, setTime] = useState(init);
-  let [start, setStart] = useState(startDate);
+  let [start, setStart] = useState(new Date());
   if (userTime) {
     init = new Date(userTime).toLocaleString("en-US", {
       timeZone: timeZone ? timeZone : "Asia/Dhaka",
