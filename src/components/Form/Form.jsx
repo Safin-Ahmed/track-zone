@@ -18,9 +18,9 @@ const validate = (values) => {
     errors.title = "Title is Required for your Clock";
   }
 
-  if (!values.time) {
-    errors.time = "Time is Required for your Clock";
-  }
+  // if (!values.time) {
+  //   errors.time = "Time is Required for your Clock";
+  // }
 
   if (!values.timeZone) {
     errors.timeZone = "Time Zone is Required For Your Clock";

@@ -34,7 +34,7 @@ const useClock = (timeZone, userTime = null) => {
   };
   useEffect(() => {
     setStart(new Date());
-  }, [userTime]);
+  }, [userTime, timeZone]);
   useEffect(() => {
     const interval = setInterval(updateTime, 1000);
     return () => {

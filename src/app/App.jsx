@@ -70,7 +70,10 @@ function App() {
     const newClock = {
       id: iterator.next().value,
       title: values.title,
-      time: new Date(`${values.date} ${values.time}`).toLocaleString(),
+      time:
+        values.date && values.time
+          ? new Date(`${values.date} ${values.time}`).toLocaleString()
+          : new Date().toLocaleString(),
       timeZone: values.timeZone,
     };
     newState.clocks.push(newClock);
@@ -112,7 +115,10 @@ function App() {
       const updatedAdminClock = {
         id: id,
         title: values.title,
-        time: `${values.date} ${values.time}`,
+        time:
+          values.date && values.time
+            ? new Date(`${values.date} ${values.time}`).toLocaleString()
+            : new Date().toLocaleString(),
         timeZone: values.timeZone,
       };
 
@@ -127,7 +133,10 @@ function App() {
     const updatedClock = {
       id: id,
       title: values.title,
-      time: `${values.date} ${values.time}`,
+      time:
+        values.date && values.time
+          ? new Date(`${values.date} ${values.time}`).toLocaleString()
+          : new Date().toLocaleString(),
       timeZone: values.timeZone,
     };
 
