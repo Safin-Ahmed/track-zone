@@ -3,11 +3,9 @@ import Clock from "../components/Clock/Clock";
 import { deepClone } from "../utils/objUtils";
 import iterator from "../utils/idGen";
 import "./App.css";
-import Form from "../components/Form/Form";
-import SelectInput from "../components/UI/inputs/SelectInput";
-import ContextMenu from "../components/UI/contextMenu/contextMenu";
 import MenuGroup from "../components/Shared/contextMenus/MenuGroup";
 import AddClock from "../components/popupForms/AddClock";
+import EditClock from "../components/popupForms/EditClock";
 
 const defaultState = {
   user: {
@@ -22,7 +20,6 @@ const defaultState = {
 function App() {
   const [state, setState] = useState(defaultState);
   const [popupFormShown, setPopupFormShown] = useState(false);
-  const [isAdminContextShown, setIsAdminContextShown] = useState(false);
   const [contextMenu, setContextMenu] = useState({
     isContextShown: false,
     isAdminContextShown: false,
@@ -30,10 +27,9 @@ function App() {
       x: null,
       y: null,
     },
-    id: undefined,
   });
-  const [isContextShown, setIsContextShown] = useState(false);
-  const [points, setPoints] = useState({ x: null, y: null });
+  const [contextId, setContextId] = useState(null);
+  const [editFormShown, setEditFormShown] = useState(false);
   useEffect(() => {
     const removeContextMenu = () => {
       const newState = deepClone(contextMenu);
@@ -74,7 +70,7 @@ function App() {
     const newClock = {
       id: iterator.next().value,
       title: values.title,
-      time: `${values.date ? values.date : ""}${
+      time: `${values.date ? values.date : ""} ${
         values.time ? values.time : ""
       }`,
       timeZone: values.timeZone,
@@ -82,17 +78,8 @@ function App() {
     newState.clocks.push(newClock);
     setState(newState);
   };
-  const addClockHandler = () => {
+  const addClockFormHandler = () => {
     setPopupFormShown(true);
-    // const newState = deepClone(state);
-    // const newClock = {
-    //   id: iterator.next().value,
-    //   title: "New Clock",
-    //   time: new Date(),
-    //   timeZone: "Asia/Kolkata",
-    // };
-    // newState.clocks.push(newClock);
-    // setState(newState);
   };
 
   const contextHandler = (e, isDefault = false, id) => {
@@ -101,14 +88,53 @@ function App() {
     const newState = deepClone(contextMenu);
     newState.points.x = e.pageX;
     newState.points.y = e.pageY;
-    newState.id = id;
+    setContextId(id);
     if (!isDefault) {
       newState.isContextShown = true;
       setContextMenu(newState);
+
       return;
     }
     newState.isAdminContextShown = true;
     setContextMenu(newState);
+  };
+
+  // Context Menu Action Handlers
+
+  const deleteClock = (id) => {
+    const newState = deepClone(state);
+    const filtered = newState.clocks.filter((clock) => clock.id !== id);
+    newState.clocks = filtered;
+    setState(newState);
+  };
+
+  const editClock = (id, values) => {
+    const newState = deepClone(state);
+    if (id === "uz") {
+      const updatedAdminClock = {
+        id: id,
+        title: values.title,
+        time: `${values.date} ${values.time}`,
+        timeZone: values.timeZone,
+      };
+
+      newState.user = updatedAdminClock;
+
+      return setState(newState);
+    }
+    const updateClockIndex = newState.clocks.findIndex(
+      (clock) => clock.id === id
+    );
+
+    const updatedClock = {
+      id: id,
+      title: values.title,
+      time: `${values.date} ${values.time}`,
+      timeZone: values.timeZone,
+    };
+
+    newState.clocks[updateClockIndex] = updatedClock;
+    setState(newState);
   };
   return (
     <>
@@ -117,6 +143,17 @@ function App() {
           <AddClock
             addNewClock={addNewClock}
             setPopupFormShown={setPopupFormShown}
+          />
+        </>
+      )}
+
+      {editFormShown && (
+        <>
+          <EditClock
+            id={contextId}
+            editClock={editClock}
+            setEditFormShown={setEditFormShown}
+            state={state}
           />
         </>
       )}
@@ -149,26 +186,30 @@ function App() {
         </div>
         {contextMenu.isContextShown && (
           <MenuGroup
-            id={contextMenu.id}
+            id={contextId}
             state={state}
             setState={setState}
             top={contextMenu.points.y}
             left={contextMenu.points.x}
+            deleteClock={deleteClock}
+            setEditFormShown={setEditFormShown}
           />
         )}
         {contextMenu.isAdminContextShown && (
           <MenuGroup
             admin
-            id={contextMenu.id}
+            id={contextId}
             state={state}
             setState={setState}
             top={contextMenu.points.y}
             left={contextMenu.points.x}
+            deleteClock={deleteClock}
+            setEditFormShown={setEditFormShown}
           />
         )}
       </div>
 
-      <button onClick={addClockHandler} className="add_clock">
+      <button onClick={addClockFormHandler} className="add_clock">
         +Add Clock
       </button>
     </>

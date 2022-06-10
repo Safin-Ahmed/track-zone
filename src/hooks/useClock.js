@@ -1,12 +1,31 @@
 import { useEffect, useState } from "react";
 
-const useClock = (timeZone) => {
-  let [time, setTime] = useState(
-    new Date().toLocaleString("en-US", {
+let init;
+let startDate = new Date();
+const useClock = (timeZone, userTime = null) => {
+  let [time, setTime] = useState(init);
+  let [start, setStart] = useState(startDate);
+  if (userTime) {
+    init = new Date(userTime).toLocaleString("en-US", {
       timeZone: timeZone ? timeZone : "Asia/Dhaka",
-    })
-  );
+    });
+  } else {
+    init = new Date().toLocaleString("en-US", {
+      timeZone: timeZone ? timeZone : "Asia/Dhaka",
+    });
+  }
+
   const updateTime = () => {
+    if (userTime) {
+      const diff = new Date().getTime() - start.getTime();
+      const myTime = new Date(userTime);
+      myTime.setMilliseconds(myTime.getMilliseconds() + diff);
+      return setTime(
+        new Date(myTime).toLocaleString("en-US", {
+          timeZone: timeZone ? timeZone : "default",
+        })
+      );
+    }
     setTime(
       new Date().toLocaleString("en-US", {
         timeZone: timeZone ? timeZone : "Asia/Dhaka",

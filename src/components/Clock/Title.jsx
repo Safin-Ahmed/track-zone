@@ -13,6 +13,7 @@ const Title = ({
   const [title, setTitle] = useState(defaultTitle);
   const clickHandler = () => {
     setClicked(true);
+    setTitle(defaultTitle);
   };
 
   const onChangeHandler = (e) => {
@@ -46,7 +47,7 @@ const Title = ({
         )}
         {!clicked && (
           <span onDoubleClick={clickHandler} className={classes.title}>
-            {title ? title : "Your Clock"}
+            {defaultTitle ? defaultTitle : "Your Clock"}
           </span>
         )}
         {timeZone && <span className={classes.timeZone}> {timeZone}</span>}

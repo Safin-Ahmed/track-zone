@@ -14,8 +14,9 @@ const Clock = ({
   setTimeZoneHandler,
   onContextHandler,
 }) => {
+  console.log(`From CLock Component: `, time);
   const { date, hours, minutes, seconds, period, month, numDay, day, year } =
-    useClock(timeZone);
+    useClock(timeZone, time);
   return (
     <div
       className={`${classes.clockContainer} ${

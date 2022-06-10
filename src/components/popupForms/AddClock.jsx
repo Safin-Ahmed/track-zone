@@ -5,7 +5,7 @@ const AddClock = ({ addNewClock, setPopupFormShown }) => {
   return (
     <>
       <div className="backdrop" onClick={() => setPopupFormShown(false)}></div>
-      <Form addNewClock={addNewClock} setPopupFormShown={setPopupFormShown} />
+      <Form clockFn={addNewClock} setPopupFormShown={setPopupFormShown} />
     </>
   );
 };
