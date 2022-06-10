@@ -11,7 +11,7 @@ const defaultState = {
   user: {
     id: "uz",
     title: "Your Clock",
-    time: new Date(),
+    time: new Date().toLocaleString(),
     timeZone: "Asia/Dhaka",
   },
   clocks: [],
@@ -70,9 +70,7 @@ function App() {
     const newClock = {
       id: iterator.next().value,
       title: values.title,
-      time: `${values.date ? values.date : ""} ${
-        values.time ? values.time : ""
-      }`,
+      time: new Date(`${values.date} ${values.time}`).toLocaleString(),
       timeZone: values.timeZone,
     };
     newState.clocks.push(newClock);
@@ -136,6 +134,23 @@ function App() {
     newState.clocks[updateClockIndex] = updatedClock;
     setState(newState);
   };
+
+  const resetClockHandler = (id) => {
+    const newState = deepClone(state);
+    if (id === "uz") {
+      newState.user.time = new Date().toLocaleString();
+      setState(newState);
+      return;
+    } else {
+      const userClockIndex = newState.clocks.findIndex(
+        (clock) => clock.id === id
+      );
+      newState.clocks[userClockIndex].time = new Date().toLocaleString();
+
+      setState(newState);
+      return;
+    }
+  };
   return (
     <>
       {popupFormShown && (
@@ -193,6 +208,7 @@ function App() {
             left={contextMenu.points.x}
             deleteClock={deleteClock}
             setEditFormShown={setEditFormShown}
+            resetClockHandler={resetClockHandler}
           />
         )}
         {contextMenu.isAdminContextShown && (
@@ -205,6 +221,7 @@ function App() {
             left={contextMenu.points.x}
             deleteClock={deleteClock}
             setEditFormShown={setEditFormShown}
+            resetClockHandler={resetClockHandler}
           />
         )}
       </div>

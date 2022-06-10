@@ -14,7 +14,6 @@ const Clock = ({
   setTimeZoneHandler,
   onContextHandler,
 }) => {
-  console.log(`From CLock Component: `, time);
   const { date, hours, minutes, seconds, period, month, numDay, day, year } =
     useClock(timeZone, time);
   return (

@@ -8,8 +8,7 @@ const MenuGroup = ({
   left,
   admin,
   id,
-  state,
-  setState,
+  resetClockHandler,
   deleteClock,
   setEditFormShown,
 }) => {
@@ -19,6 +18,14 @@ const MenuGroup = ({
         <li onClick={() => setEditFormShown(true)}>Edit</li>
         {!admin && <li onClick={() => deleteClock(id)}>Delete</li>}
         <li>Events</li>
+        <li
+          onClick={() => {
+            console.log(`${id} from resetHandler`);
+            resetClockHandler(id);
+          }}
+        >
+          Reset
+        </li>
       </ul>
     </ContextMenu>
   );
