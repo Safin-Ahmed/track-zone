@@ -1,0 +1,9 @@
+.popupForm {
+  width: 80%;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}

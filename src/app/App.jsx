@@ -6,6 +6,7 @@ import "./App.css";
 import MenuGroup from "../components/Shared/contextMenus/MenuGroup";
 import AddClock from "../components/popupForms/AddClock";
 import EditClock from "../components/popupForms/EditClock";
+import Events from "../components/Events/Events";
 
 const defaultState = {
   user: {
@@ -13,6 +14,7 @@ const defaultState = {
     title: "Your Clock",
     time: new Date().toLocaleString(),
     timeZone: "Asia/Dhaka",
+    events: [],
   },
   clocks: [],
 };
@@ -30,6 +32,7 @@ function App() {
   });
   const [contextId, setContextId] = useState(null);
   const [editFormShown, setEditFormShown] = useState(false);
+  const [eventsPageShown, setEventsPageShown] = useState(false);
   useEffect(() => {
     const removeContextMenu = () => {
       const newState = deepClone(contextMenu);
@@ -75,6 +78,7 @@ function App() {
           ? new Date(`${values.date} ${values.time}`).toLocaleString()
           : new Date().toLocaleString(),
       timeZone: values.timeZone,
+      events: [],
     };
     newState.clocks.push(newClock);
     setState(newState);
@@ -112,6 +116,7 @@ function App() {
   const editClock = (id, values) => {
     const newState = deepClone(state);
     if (id === "uz") {
+      const eventsClone = deepClone(state.user.events);
       const updatedAdminClock = {
         id: id,
         title: values.title,
@@ -120,6 +125,7 @@ function App() {
             ? new Date(`${values.date} ${values.time}`).toLocaleString()
             : new Date().toLocaleString(),
         timeZone: values.timeZone,
+        events: [...eventsClone],
       };
 
       newState.user = updatedAdminClock;
@@ -130,6 +136,10 @@ function App() {
       (clock) => clock.id === id
     );
 
+    const updateClockEvents = deepClone(
+      newState.clocks[updateClockIndex].events
+    );
+
     const updatedClock = {
       id: id,
       title: values.title,
@@ -138,6 +148,7 @@ function App() {
           ? new Date(`${values.date} ${values.time}`).toLocaleString()
           : new Date().toLocaleString(),
       timeZone: values.timeZone,
+      events: [...updateClockEvents],
     };
 
     newState.clocks[updateClockIndex] = updatedClock;
@@ -160,6 +171,7 @@ function App() {
       return;
     }
   };
+
   return (
     <>
       {popupFormShown && (
@@ -180,6 +192,15 @@ function App() {
             state={state}
           />
         </>
+      )}
+
+      {eventsPageShown && (
+        <Events
+          state={state}
+          setState={setState}
+          id={contextId}
+          setEventsPageShown={setEventsPageShown}
+        />
       )}
       <div className="clocks">
         <div className="default-clock">
@@ -219,6 +240,7 @@ function App() {
             deleteClock={deleteClock}
             setEditFormShown={setEditFormShown}
             resetClockHandler={resetClockHandler}
+            setEventsPageShown={setEventsPageShown}
           />
         )}
         {contextMenu.isAdminContextShown && (
@@ -232,6 +254,7 @@ function App() {
             deleteClock={deleteClock}
             setEditFormShown={setEditFormShown}
             resetClockHandler={resetClockHandler}
+            setEventsPageShown={setEventsPageShown}
           />
         )}
       </div>

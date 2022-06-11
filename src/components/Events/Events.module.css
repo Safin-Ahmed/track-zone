@@ -1,0 +1,25 @@
+.eventsPage {
+  background-color: #fff;
+  position: relative;
+  z-index: 99999;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.eventsPage button {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-family: "Poppins";
+  transition: all 0.2s ease-in-out;
+}
+
+.eventsPage button:hover {
+  color: salmon;
+  cursor: pointer;
+}
