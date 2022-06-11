@@ -3,6 +3,7 @@ import useClock from "../../hooks/useClock";
 import Calendar from "./Calendar";
 import classes from "./Clock.module.css";
 import Time from "./Time";
+import TimeDifference from "./timeDifference";
 import Title from "./Title";
 const Clock = ({
   isDefault = false,
@@ -10,6 +11,7 @@ const Clock = ({
   id,
   time,
   timeZone,
+  defaultTimeZone = null,
   setTitleHandler,
   setTimeZoneHandler,
   onContextHandler,
@@ -54,7 +56,15 @@ const Clock = ({
           seconds={seconds}
           period={period}
         />
-        <Calendar month={month} numDay={numDay} day={day} year={year} />
+        <div className={classes.clock_bottom}>
+          <Calendar month={month} numDay={numDay} day={day} year={year} />
+          {!isDefault && (
+            <TimeDifference
+              defaultTimeZone={defaultTimeZone}
+              timeZone={timeZone}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -201,6 +201,7 @@ function App() {
               id={clock.id}
               time={clock.time}
               timeZone={clock.timeZone}
+              defaultTimeZone={state.user.timeZone}
               setTitleHandler={setTitleHandler}
               setTimeZoneHandler={setTimeZoneHandler}
               key={clock.id}
