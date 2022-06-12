@@ -38,14 +38,20 @@ const Form = ({
   id = null,
   editState = null,
 }) => {
-  const submitCB = ({ values }) => {
+  const submitCB = ({ hasError, values }) => {
+    if (hasError) {
+      return;
+    }
     console.log(values);
     clockFn(values);
     clear();
     setPopupFormShown(false);
   };
 
-  const editCB = ({ values }) => {
+  const editCB = ({ hasError, values }) => {
+    if (hasError) {
+      return;
+    }
     if (id) {
       console.log(values);
       clockFn(id, values);

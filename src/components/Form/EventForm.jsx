@@ -24,10 +24,16 @@ const validate = (values) => {
     errors.eventEndTime = "End Time is Required For Your Event";
   }
 
+  if (
+    new Date(values.eventEndTime).getTime() < new Date(values.eventStartTime)
+  ) {
+    errors.eventEndTime =
+      "End Time Must Be a Future Time Comparing to Start Time";
+  }
   return errors;
 };
 
-const EventForm = ({ eventFns, id }) => {
+const EventForm = ({ eventFns, id, setShowEventForm }) => {
   const { addEventHandler } = eventFns;
   const {
     formState: state,
@@ -38,9 +44,13 @@ const EventForm = ({ eventFns, id }) => {
     clear,
   } = useForm({ init, validate });
 
-  const submitCB = ({ values }) => {
+  const submitCB = ({ hasError, values }) => {
+    if (hasError) {
+      return;
+    }
     addEventHandler(values, id);
     clear();
+    setShowEventForm(false);
   };
 
   return (
@@ -83,6 +93,7 @@ const EventForm = ({ eventFns, id }) => {
         />
 
         <div className={classes.actions}>
+          <button onClick={() => setShowEventForm(false)}>Close</button>
           <button type="reset" onClick={clear}>
             Reset
           </button>

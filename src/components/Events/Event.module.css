@@ -1,0 +1,40 @@
+.success {
+  background-color: aquamarine;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+}
+
+.danger {
+  background-color: tomato;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.date {
+  margin-top: 1rem;
+}
+
+.date p {
+  font-size: 0.9rem;
+}
+
+.rightPart {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.duration {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.duration i {
+  font-size: 0.9rem;
+  color: #333;
+}
