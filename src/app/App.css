@@ -12,6 +12,7 @@
   margin-top: 5rem;
   gap: 2rem;
   flex-wrap: wrap;
+  margin-bottom: 5rem;
 }
 
 .backdrop {
@@ -23,4 +24,11 @@
   background: #00000094;
   z-index: 9999;
   cursor: pointer;
+}
+
+@media (max-width: 575px) {
+  .custom-clocks {
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
 }

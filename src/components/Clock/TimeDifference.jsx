@@ -19,8 +19,10 @@ const TimeDifference = ({ defaultTimeZone, timeZone }) => {
     <div className={classes.diff_amount}>
       {diffTime % 1 === 0 && (
         <h3>
-          {diffTime > 0 ? `+ ${diffTime}` : `- ${Math.abs(diffTime)}`} Hr : 0
-          Min
+          {diffTime > 0 || diffTime === 0
+            ? `+ ${diffTime}`
+            : `- ${Math.abs(diffTime)}`}{" "}
+          Hr : 0 Min
         </h3>
       )}
       {diffTime % 1 !== 0 && (
