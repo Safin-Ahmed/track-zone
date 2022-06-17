@@ -6,9 +6,15 @@ import Button from "../UI/buttons/Button";
 import Card from "../UI/cards/Card";
 import classes from "./Event.module.css";
 
-const Event = ({ event, deleteEventHandler }) => {
-  const { eventTitle, eventStartTime, eventEndTime, timeZone, isPassed, id } =
-    event;
+const Event = ({ userId, event, deleteEventHandler }) => {
+  const {
+    eventTitle,
+    eventStartTime,
+    eventEndTime,
+    timeZone,
+    isPassed,
+    id: eventId,
+  } = event;
 
   const eventStartTimeTZ = new Date(eventStartTime).toLocaleString("en-US", {
     timeZone: timeZone,
@@ -29,6 +35,8 @@ const Event = ({ event, deleteEventHandler }) => {
     new Date(eventStartTimeTZ)
   );
 
+  console.log(diffHour);
+
   return (
     <Card>
       <div className={classes.cardLeft}>
@@ -46,7 +54,9 @@ const Event = ({ event, deleteEventHandler }) => {
           <i className="fa-solid fa-clock"></i>
           <p>{Math.floor(diffHour)} Hrs</p>
         </div>
-        <button onClick={() => deleteEventHandler(id)}>Delete</button>
+        <button onClick={() => deleteEventHandler(userId, eventId)}>
+          Delete
+        </button>
       </div>
     </Card>
   );

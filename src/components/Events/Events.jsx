@@ -6,11 +6,19 @@ import EventForm from "../Form/EventForm";
 import Event from "./Event";
 import classes from "./Events.module.css";
 
-const Events = ({ setEventsPageShown, id, state, setState }) => {
-  const [showEventForm, setShowEventForm] = useState(false);
+const Events = ({
+  setEventsPageShown,
+  id,
+  state,
+  showEventForm,
+  addEventHandler,
+  deleteEventHandler,
+  displayForm,
+}) => {
+  // const [showEventForm, setShowEventForm] = useState(false);
   const clock =
     id === "uz" ? state.user : state.clocks.find((clock) => clock.id === id);
-  const { time } = clock.time;
+  const { time } = clock;
 
   useEffect(() => {
     const newEvent = deepClone(clock.events);
@@ -25,47 +33,12 @@ const Events = ({ setEventsPageShown, id, state, setState }) => {
     clock.events = newEvent;
   }, [time]);
 
-  const addEventHandler = (values, clockId) => {
-    const newState = deepClone(state);
-    let clock;
-    if (id === "uz") {
-      clock = newState.user;
-    } else {
-      clock = newState.clocks.find((clock) => clock.id === clockId);
-    }
-    const events = deepClone(clock.events);
-    const newEvent = {
-      id: iterator.next().value,
-      timeZone: clock.timeZone,
-      isPassed: isPast(new Date(values.eventStartTime)),
-      ...values,
-    };
-    events.push(newEvent);
-
-    clock.events = events;
-
-    setState(newState);
-  };
-
-  const deleteEventHandler = (eventId) => {
-    const newState = deepClone(state);
-    let clock;
-    if (id === "uz") {
-      clock = newState.user;
-    } else {
-      clock = newState.clocks.find((clock) => clock.id === id);
-    }
-    const newEvents = clock.events.filter((event) => event.id !== eventId);
-    clock.events = newEvents;
-    setState(newState);
-  };
-
-  const eventFns = {
-    addEventHandler,
-  };
   return (
     <>
-      <div className="backdrop" onClick={() => setEventsPageShown(false)}></div>
+      <div
+        className="backdrop"
+        onClick={() => displayForm("events", false)}
+      ></div>
 
       <div className={classes.eventsPage}>
         <div className={classes.events}>
@@ -75,6 +48,7 @@ const Events = ({ setEventsPageShown, id, state, setState }) => {
                   deleteEventHandler={deleteEventHandler}
                   key={event.id}
                   event={event}
+                  userId={id}
                 />
               ))
             : "No Events Found"}
@@ -82,13 +56,15 @@ const Events = ({ setEventsPageShown, id, state, setState }) => {
 
         {showEventForm && (
           <EventForm
-            setShowEventForm={setShowEventForm}
-            eventFns={eventFns}
+            setShowEventForm={displayForm}
+            addEventHandler={addEventHandler}
             id={id}
           />
         )}
 
-        <button onClick={() => setShowEventForm(true)}>+ Add Event</button>
+        <button onClick={() => displayForm("eventForm", true)}>
+          + Add Event
+        </button>
       </div>
     </>
   );

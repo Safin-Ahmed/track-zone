@@ -4,7 +4,10 @@ import Form from "../Form/Form";
 const AddClock = ({ addNewClock, setPopupFormShown }) => {
   return (
     <>
-      <div className="backdrop" onClick={() => setPopupFormShown(false)}></div>
+      <div
+        className="backdrop"
+        onClick={() => setPopupFormShown("add", false)}
+      ></div>
       <Form clockFn={addNewClock} setPopupFormShown={setPopupFormShown} />
     </>
   );

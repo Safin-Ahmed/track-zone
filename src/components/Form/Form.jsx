@@ -45,7 +45,7 @@ const Form = ({
     console.log(values);
     clockFn(values);
     clear();
-    setPopupFormShown(false);
+    setPopupFormShown("add", false);
   };
 
   const editCB = ({ hasError, values }) => {
@@ -56,7 +56,7 @@ const Form = ({
       console.log(values);
       clockFn(id, values);
       clear();
-      setPopupFormShown(false);
+      setPopupFormShown("edit", false);
     }
   };
 

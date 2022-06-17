@@ -33,8 +33,7 @@ const validate = (values) => {
   return errors;
 };
 
-const EventForm = ({ eventFns, id, setShowEventForm }) => {
-  const { addEventHandler } = eventFns;
+const EventForm = ({ addEventHandler, id, setShowEventForm }) => {
   const {
     formState: state,
     handleBlur,
@@ -50,7 +49,7 @@ const EventForm = ({ eventFns, id, setShowEventForm }) => {
     }
     addEventHandler(values, id);
     clear();
-    setShowEventForm(false);
+    setShowEventForm("eventForm", false);
   };
 
   return (
@@ -93,7 +92,9 @@ const EventForm = ({ eventFns, id, setShowEventForm }) => {
         />
 
         <div className={classes.actions}>
-          <button onClick={() => setShowEventForm(false)}>Close</button>
+          <button onClick={() => setShowEventForm("eventForm", false)}>
+            Close
+          </button>
           <button type="reset" onClick={clear}>
             Reset
           </button>

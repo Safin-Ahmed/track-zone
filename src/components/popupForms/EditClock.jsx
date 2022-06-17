@@ -5,7 +5,10 @@ const EditClock = ({ editClock, setEditFormShown, id, state }) => {
   console.log(`${id} from Edit Clock`);
   return (
     <>
-      <div className="backdrop" onClick={() => setEditFormShown(false)}></div>
+      <div
+        className="backdrop"
+        onClick={() => setEditFormShown("edit", false)}
+      ></div>
       <Form
         clockFn={editClock}
         setPopupFormShown={setEditFormShown}
