@@ -52,6 +52,8 @@ const useClock = (timeZone, userTime = null) => {
   const day = date.toLocaleString("default", { weekday: "long" });
   const year = date.getFullYear();
 
+  console.log({ date: init });
+
   return {
     date,
     hours,

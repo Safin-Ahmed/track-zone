@@ -7,7 +7,7 @@ const defaultState = {
   user: {
     id: "uz",
     title: "Your Clock",
-    time: new Date().toLocaleString(),
+    time: new Date().toISOString(),
     timeZone: "Asia/Dhaka",
     events: [],
   },
@@ -73,8 +73,8 @@ const useApp = () => {
       title: values.title,
       time:
         values.date && values.time
-          ? new Date(`${values.date} ${values.time}`).toLocaleString()
-          : new Date().toLocaleString(),
+          ? new Date(`${values.date} ${values.time}`).toISOString()
+          : new Date().toISOString(),
       timeZone: values.timeZone,
       events: [],
     };
@@ -143,8 +143,8 @@ const useApp = () => {
         title: values.title,
         time:
           values.date && values.time
-            ? new Date(`${values.date} ${values.time}`).toLocaleString()
-            : new Date().toLocaleString(),
+            ? new Date(`${values.date} ${values.time}`).toISOString()
+            : new Date().toISOString(),
         timeZone: values.timeZone,
         events: [...eventsClone],
       };
@@ -166,8 +166,8 @@ const useApp = () => {
       title: values.title,
       time:
         values.date && values.time
-          ? new Date(`${values.date} ${values.time}`).toLocaleString()
-          : new Date().toLocaleString(),
+          ? new Date(`${values.date} ${values.time}`).toISOString()
+          : new Date().toISOString(),
       timeZone: values.timeZone,
       events: [...updateClockEvents],
     };
@@ -179,14 +179,14 @@ const useApp = () => {
   const resetClockHandler = (id) => {
     const newState = deepClone(state);
     if (id === "uz") {
-      newState.user.time = new Date().toLocaleString();
+      newState.user.time = new Date().toISOString();
       setState(newState);
       return;
     } else {
       const userClockIndex = newState.clocks.findIndex(
         (clock) => clock.id === id
       );
-      newState.clocks[userClockIndex].time = new Date().toLocaleString();
+      newState.clocks[userClockIndex].time = new Date().toISOString();
 
       setState(newState);
       return;
